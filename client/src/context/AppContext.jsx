@@ -1,8 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { dummyProducts } from "../assets/assets";
-export const AppContext = createContext();
 import toast from "react-hot-toast";
+import axios from "axios";
+
+axios.defaults.withCredentials = true;
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
+
+export const AppContext = createContext();
 
 export const AppContextProvider = ({ children }) => {
 
@@ -10,7 +15,7 @@ export const AppContextProvider = ({ children }) => {
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
-    const [isSeller, setSeller] = useState(false);
+    const [isSeller, setIsSeller] = useState(false);
     const [showUserLogin, setShowUserLogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
@@ -88,7 +93,7 @@ export const AppContextProvider = ({ children }) => {
         user,
         setUser,
         isSeller,
-        setSeller,
+        setIsSeller,
         showUserLogin,
         setShowUserLogin,
         products,
@@ -100,7 +105,8 @@ export const AppContextProvider = ({ children }) => {
         searchQuery,
         setSearchQuery,
         getCartAmount,
-        getCartCount
+        getCartCount,
+        axios
     };
 
     return <AppContext.Provider value={value}>

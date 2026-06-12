@@ -14,13 +14,13 @@ export const sellerLogin = async (req, res) => {
             sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'strict',
             maxAge: 7 * 24 * 60 * 60 * 1000
         });
-        return res.status(200).json({ sucess: true, message: 'Login successful', token });
+        return res.status(200).json({ success: true, message: 'Login successful', token });
     }else{
-        return res.status(401).json({ sucess: false, message: 'Invalid credentials' });
+        return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
     } catch (error) {
         console.log(error.message);
-        res.json({ sucess: false, message: error.message });
+        res.json({ success: false, message: error.message });
     }
 }
 
