@@ -7,6 +7,6 @@ import e from 'express';
 const addressRouter = express.Router();
 
 addressRouter.post('/add', authUser, addAdress);
-addressRouter.post('/get', authUser, getAddress);
+addressRouter.get('/get', authUser, getAddress);
 
 export default addressRouter;

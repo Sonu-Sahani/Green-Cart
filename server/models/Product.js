@@ -22,7 +22,7 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
     category: {
-        type: Array,
+        type: String,
         required: true,
     },
     inStock: {

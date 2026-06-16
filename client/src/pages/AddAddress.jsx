@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { assets } from '../assets/assets'
 import { useAppContext } from '../context/AppContext'
+import toast from 'react-hot-toast';
 
 const InputField = ({ type, placeholder, name, handleChange, address }) => (
   <input
@@ -16,7 +17,7 @@ const InputField = ({ type, placeholder, name, handleChange, address }) => (
 )
 
 const AddAddress = () => {
-  const { navigate } = useAppContext();
+  const { navigate, axios, user } = useAppContext();
 
   const [address, setAddress] = useState({
     firstName: '',
@@ -40,12 +41,30 @@ const AddAddress = () => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
 
-    const existingAddresses = JSON.parse(localStorage.getItem("greencart-addresses")) || [];
-    const updatedAddresses = [...existingAddresses, address];
-    localStorage.setItem("greencart-addresses", JSON.stringify(updatedAddresses));
+    try {
+      const { data } = await axios.post('/api/address/add', {
+    userId: user._id,
+    address
+})
 
-    navigate("/cart");
+      if(data.success){
+        toast.success(data.message);
+        navigate('/cart')
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   };
+
+  useEffect(() => {
+  if (user === undefined) return;
+
+  if (!user) {
+    navigate('/cart');
+  }
+}, [user, navigate]);
 
   return (
     <div className='mt-16 pb-16'>
