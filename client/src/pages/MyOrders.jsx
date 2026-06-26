@@ -7,12 +7,21 @@ const MyOrders = () => {
     const { currency, axios, user } = useAppContext();
 
     const fetchMyOrders = async () => {
-
+        try {
+            const {data} = await axios.get('/api/order/user')
+        if(data.success){
+            setMyorders(data.orders)
+        }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
-        fetchMyOrders();
-    }, []);
+        if(user){
+            fetchMyOrders();
+        }
+    }, [user]);
 
     return (
         <div className="mt-16 pb-16">
