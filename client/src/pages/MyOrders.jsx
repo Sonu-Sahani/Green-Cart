@@ -4,10 +4,10 @@ import { useAppContext } from "../context/AppContext";
 
 const MyOrders = () => {
     const [myorders, setMyorders] = useState([]);
-    const { currency } = useAppContext();
+    const { currency, axios, user } = useAppContext();
 
     const fetchMyOrders = async () => {
-        setMyorders(dummyOrders);
+
     };
 
     useEffect(() => {

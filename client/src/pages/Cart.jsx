@@ -15,7 +15,8 @@ const Cart = () => {
         navigate,
         getCartAmount,
         axios,
-        user
+        user,
+        setCartItems
     } = useAppContext();
 
     const [cartArray, setCartArray] = useState([]);
@@ -56,6 +57,30 @@ const Cart = () => {
 
     const placeOrder = async () => {
         // Logic for placing order
+        try {
+            if(!selectedAddress){
+                return toast.error("Please Select an address")
+            }
+
+            //place order with cod
+            if(paymentOption === "COD"){
+                const { data } = await axios.post('/api/order/cod', {
+                    userId: user._id,
+                    items: cartArray.map(item=>({product: item._id, quantity: item.quantity})),
+                    address: selectedAddress._id
+                })
+
+                if(data.success){
+                    toast.success(data.message)
+                    setCartItems({})
+                    navigate('/my-orders')
+                }else{
+                    toast.error(data.message)
+                }
+            }
+        } catch (error) {
+            toast.error(error.message) 
+        }
     };
 
     useEffect(() => {
