@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from "./pages/home";
+import Home from "./pages/Home";
 import { Toaster } from "react-hot-toast";
 import { useAppContext } from "./context/AppContext";
 import Login from "./components/Login";
