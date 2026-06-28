@@ -41,7 +41,7 @@ const Navbar = () => {
   }, [searchQuery])
 
   return (
-    <nav className="flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white relative transition-all">
+    <nav className="relative z-50 flex items-center justify-between px-6 md:px-16 lg:px-24 xl:px-32 py-4 border-b border-gray-300 bg-white transition-all">
 
       <NavLink to='/' onClick={() => setOpen(false)}>
         <img className="h-9" src={assets.logo} alt='logo' />
@@ -107,13 +107,13 @@ const Navbar = () => {
 
 
       {/* Mobile Menu Button */}
-      <button onClick={() => setOpen(!open)} aria-label="Menu" className="sm:hidden">
+      {/* <button onClick={() => setOpen(!open)} aria-label="Menu" className="sm:hidden">
         <img src={assets.menu_icon} alt="menu" />
-      </button>
+      </button> */}
 
       {/* Mobile Menu */}
       {open && (
-        <div className="absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden">
+        <div className="absolute top-full left-0 z-50 w-full bg-white shadow-lg py-4 flex flex-col items-start gap-3 px-5 text-sm md:hidden">
           <NavLink to='/' onClick={() => setOpen(false)}>Home</NavLink>
           <NavLink to='/products' onClick={() => setOpen(false)}>All Products</NavLink>
           {user && <NavLink to='/my-orders' onClick={() => setOpen(false)}>My Orders</NavLink>}
