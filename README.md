@@ -1,4 +1,4 @@
-# 🛒 GreenCart - Full Stack Grocery Delivery Platform
+# 🛒 FreshBasket - Full Stack Grocery Delivery Platform
 
 ![React](https://img.shields.io/badge/React-19-blue?logo=react)
 ![Node](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
